@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-main",
+      "description": "Eco-friendly lifestyle products",
+      "imageUrl": "https://picsum.photos/seed/ecotag-hero/1200/600",
+      "imageHint": "eco friendly"
+    },
+    {
+      "id": "prod-1",
+      "description": "Bamboo Water Bottle",
+      "imageUrl": "https://picsum.photos/seed/bottle/600/600",
+      "imageHint": "bamboo bottle"
+    },
+    {
+      "id": "prod-2",
+      "description": "Organic Cotton Tote",
+      "imageUrl": "https://picsum.photos/seed/tote/600/600",
+      "imageHint": "cotton bag"
+    },
+    {
+      "id": "prod-3",
+      "description": "Solar Power Bank",
+      "imageUrl": "https://picsum.photos/seed/solar/600/600",
+      "imageHint": "solar charger"
+    },
+    {
+      "id": "prod-4",
+      "description": "Recycled Plastic Sneakers",
+      "imageUrl": "https://picsum.photos/seed/shoes/600/600",
+      "imageHint": "recycled sneakers"
+    },
+    {
+      "id": "prod-5",
+      "description": "Hemp Backpack",
+      "imageUrl": "https://picsum.photos/seed/backpack/600/600",
+      "imageHint": "hemp backpack"
+    },
+    {
+      "id": "prod-6",
+      "description": "Beeswax Food Wraps",
+      "imageUrl": "https://picsum.photos/seed/wraps/600/600",
+      "imageHint": "beeswax wrap"
+    }
+  ]
 }
