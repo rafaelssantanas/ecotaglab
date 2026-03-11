@@ -55,6 +55,7 @@ export default function HomePage() {
           fill 
           className="object-cover brightness-50 scale-105 hover:scale-100 transition-transform duration-1000"
           priority
+          data-ai-hint="eco friendly"
         />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl text-white space-y-6 animate-in fade-in slide-in-from-left-8 duration-700">
@@ -66,12 +67,12 @@ export default function HomePage() {
               <span className="text-secondary">Measured.</span>
             </h1>
             <p className="text-lg text-gray-200 leading-relaxed">
-              Explore our curated collection of eco-friendly products. This page triggers a <code className="bg-black/30 px-1 rounded text-secondary">view_promotion</code> event for tagging studies.
+              Explore nossa coleção de produtos eco-friendly. Esta página dispara um evento <code className="bg-black/30 px-1 rounded text-secondary">view_promotion</code> para estudos de tagging.
             </p>
             <div className="flex gap-4">
               <Link href="/products">
                 <Button size="lg" className="rounded-full px-8 bg-primary hover:bg-primary/90">
-                  Shop Catalog <ArrowRight className="ml-2 h-4 w-4" />
+                  Ver Catálogo <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>
@@ -83,9 +84,9 @@ export default function HomePage() {
       <section className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            { icon: ShieldCheck, title: "Verified Sustainable", desc: "All products undergo rigorous environmental impact assessments." },
-            { icon: Zap, title: "Fast Green Shipping", desc: "Carbon-neutral delivery across the entire globe." },
-            { icon: FlaskConical, title: "Tagging Lab", desc: "Simulate complex e-commerce events for GA4 and GTM testing." }
+            { icon: ShieldCheck, title: "Sustentabilidade Verificada", desc: "Todos os produtos passam por avaliações rigorosas de impacto ambiental." },
+            { icon: Zap, title: "Entrega Rápida e Verde", desc: "Logística com emissão zero de carbono para todo o mundo." },
+            { icon: FlaskConical, title: "Tagging Lab", desc: "Simule eventos complexos de e-commerce para testes de GA4 e GTM." }
           ].map((feature, i) => (
             <Card key={i} className="border-none bg-white/50 backdrop-blur shadow-sm hover:shadow-md transition-shadow">
               <CardContent className="p-8 space-y-4">
@@ -104,12 +105,12 @@ export default function HomePage() {
       <section className="container mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-3xl font-headline">Featured Collection</h2>
-            <p className="text-muted-foreground">Top items this month</p>
+            <h2 className="text-3xl font-headline">Coleção em Destaque</h2>
+            <p className="text-muted-foreground">Os itens mais populares deste mês</p>
           </div>
           <Link href="/products">
             <Button variant="link" className="text-primary font-bold">
-              View All Products
+              Ver Todos os Produtos
             </Button>
           </Link>
         </div>
@@ -132,7 +133,7 @@ export default function HomePage() {
                   <p className="text-muted-foreground text-sm line-clamp-1 mt-1">{product.description}</p>
                   <div className="mt-4 flex items-center justify-between">
                     <span className="font-bold text-lg">${product.price.toFixed(2)}</span>
-                    <Button variant="secondary" size="sm" className="rounded-full">Details</Button>
+                    <Button variant="secondary" size="sm" className="rounded-full">Detalhes</Button>
                   </div>
                 </CardContent>
               </Card>
