@@ -4,7 +4,6 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CartProvider } from '@/store/cart-context';
 import { Toaster } from '@/components/ui/toaster';
-import { TagMonitor } from '@/components/tagging/TagMonitor';
 
 export const metadata: Metadata = {
   title: 'EcoTagLab - Study E-commerce Tagging',
@@ -30,7 +29,6 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <TagMonitor />
           <Toaster />
         </CartProvider>
       </body>

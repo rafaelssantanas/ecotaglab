@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Trash2, ShoppingCart, ArrowRight, Minus, Plus } from 'lucide-react';
@@ -8,52 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useCart } from '@/store/cart-context';
-import { useTagging } from '@/hooks/use-tagging';
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, totalPrice, totalItems } = useCart();
-  const { trackEvent } = useTagging();
-
-  useEffect(() => {
-    trackEvent({
-      event: 'page_view',
-      page_title: 'EcoTagLab | Cart',
-      page_location: window.location.href
-    });
-
-    trackEvent({
-      event: 'view_cart',
-      ecommerce: {
-        currency: 'USD',
-        value: totalPrice,
-        items: items.map(item => ({
-          item_id: item.id,
-          item_name: item.name,
-          item_category: item.category,
-          price: item.price,
-          quantity: item.quantity
-        }))
-      }
-    });
-  }, [trackEvent, items, totalPrice]);
-
-  const handleRemove = (id: string, name: string, price: number, cat: string) => {
-    trackEvent({
-      event: 'remove_from_cart',
-      ecommerce: {
-        currency: 'USD',
-        value: price,
-        items: [{
-          item_id: id,
-          item_name: name,
-          item_category: cat,
-          price: price,
-          quantity: 1
-        }]
-      }
-    });
-    removeItem(id);
-  };
 
   if (items.length === 0) {
     return (
@@ -99,7 +55,7 @@ export default function CartPage() {
                       variant="ghost" 
                       size="icon" 
                       className="text-muted-foreground hover:text-destructive transition-colors"
-                      onClick={() => handleRemove(item.id, item.name, item.price, item.category)}
+                      onClick={() => removeItem(item.id)}
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -162,15 +118,6 @@ export default function CartPage() {
                   Begin Checkout <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-
-              <div className="p-4 bg-muted/50 rounded-xl space-y-2">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground text-center">Tagging Implementation</p>
-                <ul className="text-[9px] text-muted-foreground list-disc pl-4 space-y-1">
-                  <li>Triggers <code>view_cart</code> on page load.</li>
-                  <li>Triggers <code>remove_from_cart</code> on item deletion.</li>
-                  <li>Triggers <code>begin_checkout</code> upon clicking button.</li>
-                </ul>
-              </div>
             </CardContent>
           </Card>
         </div>

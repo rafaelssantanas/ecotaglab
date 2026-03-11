@@ -1,15 +1,14 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { CheckCircle2, CreditCard, Truck, MapPin, ArrowLeft, ArrowRight, ShoppingBag } from 'lucide-react';
+import { CheckCircle2, CreditCard, Truck, MapPin, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCart } from '@/store/cart-context';
-import { useTagging } from '@/hooks/use-tagging';
 import { Progress } from '@/components/ui/progress';
 
 type Step = 'shipping' | 'payment' | 'confirmation' | 'success';
@@ -17,86 +16,16 @@ type Step = 'shipping' | 'payment' | 'confirmation' | 'success';
 export default function CheckoutPage() {
   const [step, setStep] = useState<Step>('shipping');
   const { items, totalPrice, clearCart } = useCart();
-  const { trackEvent } = useTagging();
-
-  useEffect(() => {
-    trackEvent({
-      event: 'page_view',
-      page_title: `EcoTagLab | Checkout - ${step}`,
-      page_location: window.location.href
-    });
-
-    if (step === 'shipping') {
-      trackEvent({
-        event: 'begin_checkout',
-        ecommerce: {
-          currency: 'USD',
-          value: totalPrice,
-          items: items.map(item => ({
-            item_id: item.id,
-            item_name: item.name,
-            price: item.price,
-            quantity: item.quantity
-          }))
-        }
-      });
-    }
-  }, [step, trackEvent, items, totalPrice]);
 
   const handleNextStep = () => {
     if (step === 'shipping') {
-      trackEvent({
-        event: 'add_shipping_info',
-        ecommerce: {
-          currency: 'USD',
-          value: totalPrice,
-          shipping_tier: 'Standard Ground',
-          items: items.map(item => ({
-            item_id: item.id,
-            item_name: item.name,
-            price: item.price,
-            quantity: item.quantity
-          }))
-        }
-      });
       setStep('payment');
     } else if (step === 'payment') {
-      trackEvent({
-        event: 'add_payment_info',
-        ecommerce: {
-          currency: 'USD',
-          value: totalPrice,
-          payment_type: 'Credit Card',
-          items: items.map(item => ({
-            item_id: item.id,
-            item_name: item.name,
-            price: item.price,
-            quantity: item.quantity
-          }))
-        }
-      });
       setStep('confirmation');
     }
   };
 
   const handleCompletePurchase = () => {
-    const transactionId = `T-${Math.floor(Math.random() * 1000000)}`;
-    trackEvent({
-      event: 'purchase',
-      ecommerce: {
-        transaction_id: transactionId,
-        currency: 'USD',
-        value: totalPrice,
-        tax: 0,
-        shipping: 0,
-        items: items.map(item => ({
-          item_id: item.id,
-          item_name: item.name,
-          price: item.price,
-          quantity: item.quantity
-        }))
-      }
-    });
     setStep('success');
     clearCart();
   };
@@ -109,7 +38,7 @@ export default function CheckoutPage() {
         </div>
         <div className="space-y-4">
           <h1 className="text-4xl font-headline font-bold">Thank You for Your Purchase!</h1>
-          <p className="text-muted-foreground text-lg">Your transaction was successful. Event <code>purchase</code> has been fired.</p>
+          <p className="text-muted-foreground text-lg">Your transaction was successful.</p>
         </div>
         <Link href="/">
           <Button size="lg" className="rounded-full px-8 bg-primary">Return to Home</Button>
@@ -227,7 +156,7 @@ export default function CheckoutPage() {
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground italic text-center">
-                    Please review your order before final submission. This will fire the <code>purchase</code> event.
+                    Please review your order before final submission.
                   </p>
                 </CardContent>
               </Card>
@@ -274,16 +203,6 @@ export default function CheckoutPage() {
                 </div>
               </CardContent>
             </Card>
-
-            <div className="p-4 border rounded-xl bg-white space-y-3">
-              <h4 className="text-[10px] font-bold uppercase tracking-widest text-primary text-center">Current Event Scope</h4>
-              <div className="flex flex-col gap-1">
-                <Badge variant={step === 'shipping' ? 'default' : 'outline'} className="text-[8px] justify-center">begin_checkout</Badge>
-                <Badge variant={step === 'payment' ? 'default' : 'outline'} className="text-[8px] justify-center">add_shipping_info</Badge>
-                <Badge variant={step === 'confirmation' ? 'default' : 'outline'} className="text-[8px] justify-center">add_payment_info</Badge>
-                <Badge variant="outline" className="text-[8px] justify-center">purchase</Badge>
-              </div>
-            </div>
           </div>
         </div>
       </div>

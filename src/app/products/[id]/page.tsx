@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from 'react';
+import { useState, use } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ShoppingCart, Heart, Share2, Sparkles, Check, Loader2 } from 'lucide-react';
@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { PRODUCTS } from '@/lib/catalog';
-import { useTagging } from '@/hooks/use-tagging';
 import { useCart } from '@/store/cart-context';
 import { generateProductDetails } from '@/ai/flows/generate-product-details';
 import { toast } from '@/hooks/use-toast';
@@ -16,7 +15,6 @@ import { toast } from '@/hooks/use-toast';
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const router = useRouter();
-  const { trackEvent } = useTagging();
   const { addItem } = useCart();
   
   const initialProduct = PRODUCTS.find(p => p.id === id);
@@ -24,53 +22,15 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [isGenerating, setIsGenerating] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
-  useEffect(() => {
-    if (!product) {
-      router.push('/products');
-      return;
-    }
-
-    trackEvent({
-      event: 'page_view',
-      page_title: `EcoTagLab | ${product.name}`,
-      page_location: window.location.href
-    });
-
-    trackEvent({
-      event: 'view_item',
-      ecommerce: {
-        currency: 'USD',
-        value: product.price,
-        items: [{
-          item_id: product.id,
-          item_name: product.name,
-          item_category: product.category,
-          price: product.price
-        }]
-      }
-    });
-  }, [product, trackEvent, router]);
-
-  if (!product) return null;
+  if (!product) {
+    router.push('/products');
+    return null;
+  }
 
   const handleAddToCart = () => {
     addItem(product);
     setIsAdded(true);
-    trackEvent({
-      event: 'add_to_cart',
-      ecommerce: {
-        currency: 'USD',
-        value: product.price,
-        items: [{
-          item_id: product.id,
-          item_name: product.name,
-          item_category: product.category,
-          price: product.price,
-          quantity: 1
-        }]
-      }
-    });
-
+    
     toast({
       title: "Added to cart!",
       description: `${product.name} is now in your bag.`
@@ -173,9 +133,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <><Sparkles className="h-4 w-4" /> Enhance with AI</>
               )}
             </Button>
-            <p className="text-[10px] text-center text-muted-foreground uppercase tracking-widest">
-              Dynamic content allows for testing tagging robustness
-            </p>
           </div>
 
           <Separator />

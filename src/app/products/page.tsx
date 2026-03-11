@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Filter, Search, ShoppingBag } from 'lucide-react';
@@ -9,12 +9,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { PRODUCTS, CATEGORIES } from '@/lib/catalog';
-import { useTagging } from '@/hooks/use-tagging';
 
 export default function ProductsPage() {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const { trackEvent } = useTagging();
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter(p => {
@@ -23,29 +21,6 @@ export default function ProductsPage() {
       return matchesSearch && matchesCategory;
     });
   }, [search, selectedCategory]);
-
-  useEffect(() => {
-    trackEvent({
-      event: 'page_view',
-      page_title: 'EcoTagLab | Products',
-      page_location: window.location.href
-    });
-
-    trackEvent({
-      event: 'view_item_list',
-      ecommerce: {
-        item_list_id: 'product_catalog',
-        item_list_name: 'Primary Catalog',
-        items: filteredProducts.map((p, idx) => ({
-          item_id: p.id,
-          item_name: p.name,
-          index: idx,
-          item_category: p.category,
-          price: p.price
-        }))
-      }
-    });
-  }, [trackEvent, filteredProducts, selectedCategory]);
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -75,7 +50,7 @@ export default function ProductsPage() {
               {CATEGORIES.map(category => (
                 <Button 
                   key={category} 
-                  variant={selectedCategory === category ? "primary" : "ghost"}
+                  variant={selectedCategory === category ? "default" : "ghost"}
                   className="justify-start h-9 text-sm"
                   onClick={() => setSelectedCategory(category)}
                 >
@@ -96,26 +71,10 @@ export default function ProductsPage() {
 
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProducts.map((product, idx) => (
+              {filteredProducts.map((product) => (
                 <Link 
                   key={product.id} 
                   href={`/products/${product.id}`}
-                  onClick={() => {
-                    trackEvent({
-                      event: 'select_item',
-                      ecommerce: {
-                        item_list_id: 'product_catalog',
-                        item_list_name: 'Primary Catalog',
-                        items: [{
-                          item_id: product.id,
-                          item_name: product.name,
-                          index: idx,
-                          item_category: product.category,
-                          price: product.price
-                        }]
-                      }
-                    });
-                  }}
                 >
                   <Card className="group overflow-hidden border-none shadow-sm hover:shadow-lg transition-all">
                     <div className="aspect-square relative overflow-hidden bg-muted">

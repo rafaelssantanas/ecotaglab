@@ -7,39 +7,15 @@ import { ArrowRight, Sparkles, ShieldCheck, Zap, FlaskConical } from 'lucide-rea
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useTagging } from '@/hooks/use-tagging';
 import { PRODUCTS } from '@/lib/catalog';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function HomePage() {
-  const { trackEvent } = useTagging();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    
-    trackEvent({
-      event: 'page_view',
-      page_title: 'EcoTagLab | Home',
-      page_location: window.location.href
-    });
-
-    trackEvent({
-      event: 'view_promotion',
-      ecommerce: {
-        promotion_id: 'summer_sale_2024',
-        promotion_name: 'Summer Eco Lifestyle',
-        creative_name: 'hero_banner_01',
-        creative_slot: 'featured_header',
-        items: PRODUCTS.slice(0, 3).map(p => ({
-          item_id: p.id,
-          item_name: p.name,
-          item_category: p.category,
-          price: p.price
-        }))
-      }
-    });
-  }, [trackEvent]);
+  }, []);
 
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero-main');
 
@@ -67,7 +43,7 @@ export default function HomePage() {
               <span className="text-secondary">Measured.</span>
             </h1>
             <p className="text-lg text-gray-200 leading-relaxed">
-              Explore nossa coleção de produtos eco-friendly. Esta página dispara um evento <code className="bg-black/30 px-1 rounded text-secondary">view_promotion</code> para estudos de tagging.
+              Explore nossa coleção de produtos eco-friendly. Esta página está pronta para você implementar seu próprio tagueamento.
             </p>
             <div className="flex gap-4">
               <Link href="/products">
@@ -86,7 +62,7 @@ export default function HomePage() {
           {[
             { icon: ShieldCheck, title: "Sustentabilidade Verificada", desc: "Todos os produtos passam por avaliações rigorosas de impacto ambiental." },
             { icon: Zap, title: "Entrega Rápida e Verde", desc: "Logística com emissão zero de carbono para todo o mundo." },
-            { icon: FlaskConical, title: "Tagging Lab", desc: "Simule eventos complexos de e-commerce para testes de GA4 e GTM." }
+            { icon: FlaskConical, title: "Tagging Lab", desc: "Sua base limpa para implementar eventos complexos de e-commerce." }
           ].map((feature, i) => (
             <Card key={i} className="border-none bg-white/50 backdrop-blur shadow-sm hover:shadow-md transition-shadow">
               <CardContent className="p-8 space-y-4">
