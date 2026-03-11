@@ -43,7 +43,7 @@ export default function HomePage() {
 
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero-main');
 
-  // Previne erros de hidratação ao acessar window.location
+  // Previne erros de hidratação
   if (!mounted) return null;
 
   return (
