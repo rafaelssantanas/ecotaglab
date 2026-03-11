@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Sparkles, ShieldCheck, Zap, FlaskConical } from 'lucide-react';
@@ -13,8 +13,11 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function HomePage() {
   const { trackEvent } = useTagging();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     trackEvent({
       event: 'page_view',
       page_title: 'EcoTagLab | Home',
@@ -39,6 +42,9 @@ export default function HomePage() {
   }, [trackEvent]);
 
   const heroImg = PlaceHolderImages.find(img => img.id === 'hero-main');
+
+  // Previne erros de hidratação ao acessar window.location
+  if (!mounted) return null;
 
   return (
     <div className="space-y-16 pb-20">
