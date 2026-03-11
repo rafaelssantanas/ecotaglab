@@ -37,11 +37,11 @@ export default function CheckoutPage() {
           <CheckCircle2 className="h-12 w-12" />
         </div>
         <div className="space-y-4">
-          <h1 className="text-4xl font-headline font-bold">Thank You for Your Purchase!</h1>
-          <p className="text-muted-foreground text-lg">Your transaction was successful.</p>
+          <h1 className="text-4xl font-headline font-bold">Compra Realizada com Sucesso!</h1>
+          <p className="text-muted-foreground text-lg">Seu pedido foi processado com sucesso.</p>
         </div>
         <Link href="/">
-          <Button size="lg" className="rounded-full px-8 bg-primary">Return to Home</Button>
+          <Button size="lg" className="rounded-full px-8 bg-primary">Voltar para Home</Button>
         </Link>
       </div>
     );
@@ -53,51 +53,40 @@ export default function CheckoutPage() {
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       <div className="space-y-12">
         <div className="space-y-4">
-          <h1 className="text-3xl font-headline font-bold">Secure Checkout</h1>
+          <h1 className="text-3xl font-headline font-bold">Checkout Seguro</h1>
           <div className="space-y-2">
             <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-muted-foreground">
-              <span>Shipping</span>
-              <span>Payment</span>
-              <span>Confirm</span>
+              <span>Entrega</span>
+              <span>Pagamento</span>
+              <span>Confirmação</span>
             </div>
             <Progress value={progress} className="h-2 bg-muted border-none" />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Main Content */}
           <div className="md:col-span-2 space-y-8">
             {step === 'shipping' && (
               <Card className="border-none shadow-sm">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <MapPin className="h-5 w-5 text-primary" /> Shipping Information
+                    <MapPin className="h-5 w-5 text-primary" /> Informações de Entrega
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="fname">First Name</Label>
-                      <Input id="fname" placeholder="Jane" defaultValue="Jane" />
+                      <Label htmlFor="fname">Nome</Label>
+                      <Input id="fname" placeholder="João" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lname">Last Name</Label>
-                      <Input id="lname" placeholder="Doe" defaultValue="Doe" />
+                      <Label htmlFor="lname">Sobrenome</Label>
+                      <Input id="lname" placeholder="Silva" />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="address">Address</Label>
-                    <Input id="address" placeholder="123 Eco Street" defaultValue="123 Eco Street" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="city">City</Label>
-                      <Input id="city" placeholder="Greentown" defaultValue="Greentown" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="zip">Zip Code</Label>
-                      <Input id="zip" placeholder="12345" defaultValue="12345" />
-                    </div>
+                    <Label htmlFor="address">Endereço</Label>
+                    <Input id="address" placeholder="Rua das Flores, 123" />
                   </div>
                 </CardContent>
               </Card>
@@ -107,32 +96,16 @@ export default function CheckoutPage() {
               <Card className="border-none shadow-sm animate-in slide-in-from-right-8 duration-500">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <CreditCard className="h-5 w-5 text-primary" /> Payment Method
+                    <CreditCard className="h-5 w-5 text-primary" /> Método de Pagamento
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <RadioGroup defaultValue="card">
                     <div className="flex items-center space-x-2 border p-4 rounded-xl">
                       <RadioGroupItem value="card" id="card" />
-                      <Label htmlFor="card" className="flex-1 flex justify-between cursor-pointer">
-                        <span>Credit / Debit Card</span>
-                        <div className="flex gap-1">
-                          <div className="h-6 w-9 bg-muted rounded"></div>
-                          <div className="h-6 w-9 bg-muted rounded"></div>
-                        </div>
-                      </Label>
+                      <Label htmlFor="card" className="flex-1 cursor-pointer">Cartão de Crédito</Label>
                     </div>
                   </RadioGroup>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="cname">Name on Card</Label>
-                      <Input id="cname" placeholder="JANE DOE" defaultValue="JANE DOE" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="cnum">Card Number</Label>
-                      <Input id="cnum" placeholder="0000 0000 0000 0000" defaultValue="4242 4242 4242 4242" />
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
             )}
@@ -141,66 +114,42 @@ export default function CheckoutPage() {
               <Card className="border-none shadow-sm animate-in slide-in-from-right-8 duration-500">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Truck className="h-5 w-5 text-primary" /> Confirm Order
+                    <Truck className="h-5 w-5 text-primary" /> Revisar Pedido
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="p-4 bg-muted/50 rounded-xl space-y-4">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Deliver to:</span>
-                      <span className="font-medium">Jane Doe, 123 Eco Street</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Payment:</span>
-                      <span className="font-medium">Visa ending in 4242</span>
-                    </div>
-                  </div>
-                  <p className="text-xs text-muted-foreground italic text-center">
-                    Please review your order before final submission.
-                  </p>
+                  <p className="text-sm text-muted-foreground">Revise os detalhes abaixo antes de finalizar.</p>
                 </CardContent>
               </Card>
             )}
 
             <div className="flex justify-between pt-4">
-              {step !== 'shipping' ? (
-                <Button variant="ghost" onClick={() => setStep(step === 'payment' ? 'shipping' : 'payment')}>
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back
-                </Button>
-              ) : (
-                <Link href="/cart">
-                  <Button variant="ghost"><ArrowLeft className="mr-2 h-4 w-4" /> Return to Cart</Button>
-                </Link>
-              )}
+              <Button variant="ghost" onClick={() => {
+                if(step === 'payment') setStep('shipping');
+                if(step === 'confirmation') setStep('payment');
+              }} disabled={step === 'shipping'}>
+                Voltar
+              </Button>
               
               {step === 'confirmation' ? (
                 <Button size="lg" className="rounded-full px-8 bg-primary" onClick={handleCompletePurchase}>
-                  Complete Purchase <CheckCircle2 className="ml-2 h-4 w-4" />
+                  Finalizar Compra
                 </Button>
               ) : (
                 <Button size="lg" className="rounded-full px-8 bg-primary" onClick={handleNextStep}>
-                  Next Step <ArrowRight className="ml-2 h-4 w-4" />
+                  Próximo Passo
                 </Button>
               )}
             </div>
           </div>
 
-          {/* Sidebar Summary */}
           <div className="space-y-6">
             <Card className="border-none bg-muted/50 shadow-none">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm uppercase tracking-widest text-muted-foreground">Order Total</CardTitle>
+                <CardTitle className="text-sm uppercase tracking-widest text-muted-foreground">Total do Pedido</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-headline font-bold text-primary">${totalPrice.toFixed(2)}</div>
-                <div className="mt-4 space-y-2">
-                  {items.map(item => (
-                    <div key={item.id} className="flex justify-between text-xs">
-                      <span className="text-muted-foreground line-clamp-1">{item.quantity}x {item.name}</span>
-                      <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
-                    </div>
-                  ))}
-                </div>
               </CardContent>
             </Card>
           </div>

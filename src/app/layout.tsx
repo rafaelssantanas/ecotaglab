@@ -6,8 +6,8 @@ import { CartProvider } from '@/store/cart-context';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'EcoTagLab - Study E-commerce Tagging',
-  description: 'A platform to study and implement e-commerce tagging events.',
+  title: 'EcoTagLab - Estudo de E-commerce',
+  description: 'Plataforma para estudo e implementação de eventos de e-commerce.',
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-br">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
