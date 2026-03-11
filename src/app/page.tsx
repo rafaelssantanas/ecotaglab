@@ -36,11 +36,11 @@ export default function HomePage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl text-white space-y-6 animate-in fade-in slide-in-from-left-8 duration-700">
             <div className="inline-flex items-center gap-2 bg-secondary/90 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
-              <Sparkles className="h-3 w-3" /> Summer Promotion Live
+              <Sparkles className="h-3 w-3" /> Novidades Sustentáveis
             </div>
             <h1 className="text-5xl md:text-7xl font-headline leading-tight">
-              Sustainable Living, <br />
-              <span className="text-secondary">Measured.</span>
+              Vida Eco, <br />
+              <span className="text-secondary">Consciente.</span>
             </h1>
             <p className="text-lg text-gray-200 leading-relaxed">
               Explore nossa coleção de produtos eco-friendly. Esta página está pronta para você implementar seu próprio tagueamento.
@@ -62,7 +62,7 @@ export default function HomePage() {
           {[
             { icon: ShieldCheck, title: "Sustentabilidade Verificada", desc: "Todos os produtos passam por avaliações rigorosas de impacto ambiental." },
             { icon: Zap, title: "Entrega Rápida e Verde", desc: "Logística com emissão zero de carbono para todo o mundo." },
-            { icon: FlaskConical, title: "Tagging Lab", desc: "Sua base limpa para implementar eventos complexos de e-commerce." }
+            { icon: FlaskConical, title: "Lab de Estudos", desc: "Base limpa para você implementar seus próprios eventos de tagueamento." }
           ].map((feature, i) => (
             <Card key={i} className="border-none bg-white/50 backdrop-blur shadow-sm hover:shadow-md transition-shadow">
               <CardContent className="p-8 space-y-4">
