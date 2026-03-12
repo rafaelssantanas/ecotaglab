@@ -1,3 +1,4 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
@@ -7,7 +8,7 @@ import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'EcoTagLab - Estudo de E-commerce',
-  description: 'Plataforma para estudo e implementação de eventos de e-commerce.',
+  description: 'Plataforma limpa para estudo de arquitetura e-commerce.',
 };
 
 export default function RootLayout({

@@ -1,11 +1,12 @@
+
 "use client";
 
 /**
- * Hook vazio preparado para sua implementação personalizada de tagueamento.
+ * Hook limpo para sua implementação futura.
  */
 export function useTagging() {
-  const trackEvent = (data: any) => {
-    // Implemente sua lógica aqui
+  const trackEvent = (eventName: string, data?: any) => {
+    // Espaço reservado para seu estudo
   };
 
   return { trackEvent };
