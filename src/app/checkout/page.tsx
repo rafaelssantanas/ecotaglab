@@ -1,8 +1,9 @@
+
 "use client";
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { CheckCircle2, CreditCard, Truck, MapPin, ArrowLeft, ArrowRight } from 'lucide-react';
+import { CheckCircle2, CreditCard, Truck, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -15,14 +16,11 @@ type Step = 'shipping' | 'payment' | 'confirmation' | 'success';
 
 export default function CheckoutPage() {
   const [step, setStep] = useState<Step>('shipping');
-  const { items, totalPrice, clearCart } = useCart();
+  const { totalPrice, clearCart } = useCart();
 
   const handleNextStep = () => {
-    if (step === 'shipping') {
-      setStep('payment');
-    } else if (step === 'payment') {
-      setStep('confirmation');
-    }
+    if (step === 'shipping') setStep('payment');
+    else if (step === 'payment') setStep('confirmation');
   };
 
   const handleCompletePurchase = () => {
