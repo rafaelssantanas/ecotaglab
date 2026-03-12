@@ -1,6 +1,6 @@
 runConfig:
   maxInstances: 2
-  memory: 512MiB
+  memoryMiB: 512
 
 env:
   - variable: GEMINI_API_KEY
