@@ -4,4 +4,6 @@ runConfig:
 
 env:
   - variable: GEMINI_API_KEY
-    availability: ["BUILD", "RUNTIME"]
+    availability:
+      - BUILD
+      - RUNTIME
